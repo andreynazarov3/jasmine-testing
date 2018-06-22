@@ -51,8 +51,8 @@ $(function () {
         });
 
         it("after initial page load feed container is not empty", (done) => {
-            let articles = $(".feed article");
-            expect(articles.size()).toBeGreaterThan(0);
+            let articles = $(".feed .entry");
+            expect(articles.size()).not.toBe(0);
             done();
         });
     });
@@ -64,9 +64,9 @@ $(function () {
         // litle callback hell to make this test independent from Initial Entries test
         beforeEach((done) => {
             loadFeed(1, () => {
-                oldArticles = $(".feed article");
+                oldArticles = $(".feed .entry");
                 loadFeed(0, () => {
-                    newArticles = $(".feed article");
+                    newArticles = $(".feed .entry");
                     done();
                 });
             });
