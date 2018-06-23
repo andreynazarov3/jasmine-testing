@@ -1,4 +1,4 @@
-/* eslint no-undef: 0 */
+/* global $, allFeeds, loadFeed */
 
 $(function () {
 
@@ -64,15 +64,15 @@ $(function () {
         // litle callback hell to make this test independent from Initial Entries test
         beforeEach((done) => {
             loadFeed(1, () => {
-                oldArticles = $(".feed .entry");
+                oldArticles = $(".feed").html();
                 loadFeed(0, () => {
-                    newArticles = $(".feed .entry");
+                    newArticles = $(".feed").html();
                     done();
                 });
             });
         });
         it("when new feed is loaded container content is changing", (done) => {            
-            expect(newArticles.is(oldArticles)).toBeFalsy();
+            expect(oldArticles).not.toEqual(newArticles); 
             done();
         });
     });
